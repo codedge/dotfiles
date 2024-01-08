@@ -1,0 +1,86 @@
+# GENERAL
+export EDITOR="vim"
+
+
+# BREW
+if [ -d "/opt/homebrew/bin" ]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+if [ -d "/opt/homebrew/sbin" ]; then
+    export PATH="/opt/homebrew/sbin:$PATH"
+fi
+alias bdu='brew doctor; brew update; brew upgrade'
+
+# VIM
+alias vi='nvim'
+alias vim='nvim'
+
+# LSD
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+
+# Z
+. /opt/homebrew/etc/profile.d/z.sh
+
+# Git
+alias lg="lazygit"
+function lg()
+{
+    export LAZYGIT_NEW_DIR_FILE=~/.lazygit/newdir
+    lazygit "$@"
+    if [ -f $LAZYGIT_NEW_DIR_FILE ]; then
+            cd "$(cat $LAZYGIT_NEW_DIR_FILE)"
+            rm -f $LAZYGIT_NEW_DIR_FILE > /dev/null
+    fi
+}
+
+# COMPOSER
+export PATH="$PATH:$(composer global config bin-dir --absolute --quiet)"
+
+# PHP
+# determine versions of PHP installed with HomeBrew
+installedPhpVersions=($(brew ls --versions | ggrep -E 'php(@.*)?\s' | ggrep -oP '(?<=\s)\d\.\d' | uniq | sort))
+
+# create alias for every version of PHP installed with HomeBrew
+for phpVersion in ${installedPhpVersions[*]}; do
+    value="{"
+
+    for otherPhpVersion in ${installedPhpVersions[*]}; do
+        if [ "${otherPhpVersion}" = "${phpVersion}" ]; then
+            continue;
+        fi
+
+        value="${value} brew unlink php@${otherPhpVersion};"
+    done
+
+    value="${value} brew link php@${phpVersion} --force --overwrite; } &> /dev/null && php -v"
+
+    alias "${phpVersion}"="${value}"
+done
+
+#NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+
+eval "$(starship init zsh)"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/Caskroom/miniconda/base/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/Caskroom/miniconda/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+

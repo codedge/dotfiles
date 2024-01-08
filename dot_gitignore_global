@@ -1,0 +1,15 @@
+*~
+*.log
+*.cache
+*.sql
+.idea
+.vscode
+.vite
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+_ide_helper.php
+.phpstorm.meta.php
+.DS_Store
+node_modules/
+vendor/
