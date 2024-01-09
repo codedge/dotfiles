@@ -1,0 +1,21 @@
+{{ if eq .chezmoi.hostname "mbpm2" -}}
+[user]
+	name = Holger
+	email = holger.loesken@codedge.de
+[core]
+	excludesfile = /Users/holger/.gitignore_global
+[pull]
+        rebase = true
+
+{{ else if eq .chezmoi.hostname "CR00441" -}}
+[user]
+	name = Holger Lösken
+	email = holger.loesken@m0.xyz
+[core]
+	excludesfile = /Users/holger/.gitignore
+{{ end -}}
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
