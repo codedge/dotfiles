@@ -22,6 +22,7 @@ call plug#begin()
   Plug 'airblade/vim-gitgutter'       " Änderungen (Git) anzeigen
   Plug 'neoclide/coc.nvim'            " Umfangreiches Autocompletion und mehr
   Plug 'liuchengxu/vista.vim'         " Functions, Variablen anzeigen
+  Plug 'tpope/vim-commentary'
 call plug#end() " Plugins aktivieren
 
 " Automatisch fehlende Plugins installieren

@@ -1,8 +1,24 @@
+#zmodload zsh/zprof
+
 # GENERAL
 export EDITOR="vim"
 
+# NVM
+export NVM_LAZY_LOAD=true
+
+# ANTIDOTE
+source '/usr/share/zsh-antidote/antidote.zsh'
+antidote load
+autoload -Uz promptinit && promptinit && prompt pure
+
+
 {{- if eq .chezmoi.os "linux" }}
-SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# Backwards search with Ctrl-R
+bindkey "^R" history-incremental-pattern-search-backward
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
+# Store SSH passphrases
+eval $(keychain --eval --quiet --confhost)
 {{- end }}
 
 {{- if eq .chezmoi.os "darwin" }}
@@ -28,14 +44,6 @@ alias l='ls -l'
 alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
-
-# Z
-if [ -f $HOME/zsh-z/zsh-z.plugin.zsh ]; then
-    source $HOME/zsh-z/zsh-z.plugin.zsh;
-    autoload -U compinit; compinit;
-    zstyle ':completion:*' menu select;
-fi
-
 
 # Git
 alias lg="lazygit"
@@ -76,19 +84,6 @@ done
 {{- end }}
 
 
-#NVM
-export NVM_DIR="$HOME/.nvm"
-{{- if eq .chezmoi.os "darwin" }}
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-{{- else }}
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-{{- end }}
-
-eval "$(starship init zsh)"
-
-
 #MINICONDA
 {{- if eq .chezmoi.os "darwin" }}
 CONDA_DIR="/opt/homebrew/Caskroom/miniconda/base"
@@ -97,16 +92,11 @@ CONDA_DIR="/home/hl/miniconda3"
 {{- end }}
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$(${CONDA_DIR}'/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
+if [ -f "$CONDA_DIR/etc/profile.d/conda.sh" ]; then
+  . "$CONDA_DIR/etc/profile.d/conda.sh"
 else
-    if [ -f "$CONDA_DIR/etc/profile.d/conda.sh" ]; then
-        . "$CONDA_DIR/etc/profile.d/conda.sh"
-    else
-        export PATH="$CONDA_DIR/bin:$PATH"
-    fi
+  export PATH="$CONDA_DIR/bin:$PATH"
 fi
-unset __conda_setup
 # <<< conda initialize <<<
 
+#zprof
