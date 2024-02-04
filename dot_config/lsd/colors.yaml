@@ -13,9 +13,9 @@ date:
   older: 245
 size:
   none: 250
-  small: 245
-  medium: 0
-  large: 0
+  small: 217
+  medium: 203
+  large: 196
 inode:
   valid: 0
   invalid: 250
