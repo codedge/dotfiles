@@ -8,7 +8,7 @@ no-symlink: false
 icons:
     when: auto
     theme: fancy
-date: relative
+date: '+%Y-%m-%d %H:%M'
 blocks:
     - permission
     - size
