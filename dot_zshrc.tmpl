@@ -1,13 +1,30 @@
 #zmodload zsh/zprof
 
 # GENERAL
-export EDITOR="vim"
+export EDITOR="nvim"
 
 # NVM
 export NVM_LAZY_LOAD=true
 
+{{- if eq .chezmoi.os "darwin" }}
+# BREW
+if [ -d "/opt/homebrew/bin" ]; then
+    export PATH="/opt/homebrew/bin:$PATH"
+fi
+if [ -d "/opt/homebrew/sbin" ]; then
+    export PATH="/opt/homebrew/sbin:$PATH"
+fi
+alias bdu='brew doctor; brew update; brew upgrade'
+
+{{- end }}
+
 # ANTIDOTE
+{{- if eq .chezmoi.os "linux" }}
 source '/usr/share/zsh-antidote/antidote.zsh'
+{{- else }}
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+{{- end }}
+
 antidote load
 autoload -Uz promptinit && promptinit && prompt pure
 
@@ -28,18 +45,6 @@ if type clipcat-menu >/dev/null 2>&1; then
     bindkey -s '^\' "^Q clipcat-menu --finder=builtin insert ^J"
     bindkey -s '^]' "^Q clipcat-menu --finder=builtin remove ^J"
 fi
-
-{{- end }}
-
-{{- if eq .chezmoi.os "darwin" }}
-# BREW
-if [ -d "/opt/homebrew/bin" ]; then
-    export PATH="/opt/homebrew/bin:$PATH"
-fi
-if [ -d "/opt/homebrew/sbin" ]; then
-    export PATH="/opt/homebrew/sbin:$PATH"
-fi
-alias bdu='brew doctor; brew update; brew upgrade'
 
 {{- end }}
 
