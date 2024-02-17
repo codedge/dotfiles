@@ -52,7 +52,7 @@ set nowrap          " Wrap standardmäßig abschalten. Mit Leader w an-/abschalt
 if has('termguicolors')
     set termguicolors     " Wenn Farben nicht passen, dann die Zeile auskommentieren (z.B. macOS Terminal)	
 endif
-colorscheme catppuccin-frappe " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+colorscheme catppuccin-latte " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 
 
 
