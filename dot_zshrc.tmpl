@@ -15,8 +15,10 @@ if [ -d "/opt/homebrew/sbin" ]; then
     export PATH="/opt/homebrew/sbin:$PATH"
 fi
 alias bdu='brew doctor; brew update; brew upgrade'
-
 {{- end }}
+
+# FZF
+source <(fzf --zsh) 
 
 # ANTIDOTE
 {{- if eq .chezmoi.os "linux" }}
