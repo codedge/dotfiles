@@ -6,6 +6,8 @@ export EDITOR="nvim"
 # NVM
 export NVM_LAZY_LOAD=true
 
+export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+
 {{- if eq .chezmoi.os "darwin" }}
 # BREW
 if [ -d "/opt/homebrew/bin" ]; then

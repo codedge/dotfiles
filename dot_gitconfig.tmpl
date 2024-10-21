@@ -6,6 +6,9 @@
   email = holger.loesken@codedge.de
 {{- end }}
 
+[init]
+	defaultBranch = main
+
 [core]
 {{- if eq .chezmoi.os "darwin" }}
 	excludesfile = /Users/holger/.gitignore_global
