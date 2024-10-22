@@ -6,6 +6,7 @@ export EDITOR="nvim"
 # NVM
 export NVM_LAZY_LOAD=true
 
+# Go
 export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
 
 {{- if eq .chezmoi.os "darwin" }}
@@ -17,6 +18,34 @@ if [ -d "/opt/homebrew/sbin" ]; then
     export PATH="/opt/homebrew/sbin:$PATH"
 fi
 alias bdu='brew doctor; brew update; brew upgrade'
+{{- end }}
+
+# ANTIDOTE
+{{- if eq .chezmoi.os "linux" }}
+source '/usr/share/zsh-antidote/antidote.zsh'
+{{- else }}
+source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
+{{- end }}
+
+antidote load
+autoload -Uz promptinit && promptinit && prompt pure
+
+{{- if eq .chezmoi.os "linux" }}
+# Backwards search with Ctrl-R
+bindkey "^R" history-substring-search-down
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
+
+# Store SSH passphrases
+eval $(keychain --eval --quiet --confhost)
+
+# Clipcat clipboard manager
+if type clipcat-menu >/dev/null 2>&1; then
+    alias clipedit=' clipcat-menu --finder=builtin edit'
+    alias clipdel=' clipcat-menu --finder=builtin remove'
+
+    bindkey -s '^\' "^Q clipcat-menu --finder=builtin insert ^J"
+    bindkey -s '^]' "^Q clipcat-menu --finder=builtin remove ^J"
+fi
 {{- end }}
 
 # FZF
@@ -38,38 +67,6 @@ export FZF_DEFAULT_OPTS=" \
   --inline-info \
   $FZF_THEME
 "
-
-
-# ANTIDOTE
-{{- if eq .chezmoi.os "linux" }}
-source '/usr/share/zsh-antidote/antidote.zsh'
-{{- else }}
-source $(brew --prefix)/opt/antidote/share/antidote/antidote.zsh
-{{- end }}
-
-antidote load
-autoload -Uz promptinit && promptinit && prompt pure
-
-
-{{- if eq .chezmoi.os "linux" }}
-# Backwards search with Ctrl-R
-bindkey "^R" history-incremental-pattern-search-backward
-HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
-
-# Store SSH passphrases
-eval $(keychain --eval --quiet --confhost)
-
-# Clipcat clipboard manager
-if type clipcat-menu >/dev/null 2>&1; then
-    alias clipedit=' clipcat-menu --finder=builtin edit'
-    alias clipdel=' clipcat-menu --finder=builtin remove'
-
-    bindkey -s '^\' "^Q clipcat-menu --finder=builtin insert ^J"
-    bindkey -s '^]' "^Q clipcat-menu --finder=builtin remove ^J"
-fi
-
-{{- end }}
-
 
 # VIM
 alias vi='nvim'
