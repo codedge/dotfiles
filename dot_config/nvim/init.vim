@@ -17,12 +17,12 @@ call plug#begin()
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } } " Markdown Preview
   Plug 'yegappan/mru'                 " Most Recently Used über :MRU 
   Plug 'justinmk/vim-sneak'           " Sehr schnelles springen im Code
-  Plug 'preservim/nerdtree'           " Erweiterter Filebrowser
   Plug 'Xuyuanp/nerdtree-git-plugin'  " Erweiterung für Git
   Plug 'airblade/vim-gitgutter'       " Änderungen (Git) anzeigen
   Plug 'neoclide/coc.nvim'            " Umfangreiches Autocompletion und mehr
   Plug 'liuchengxu/vista.vim'         " Functions, Variablen anzeigen
   Plug 'tpope/vim-commentary'
+  Plug 'nvim-tree/nvim-tree.lua'
 call plug#end() " Plugins aktivieren
 
 " Automatisch fehlende Plugins installieren
@@ -52,7 +52,7 @@ set nowrap          " Wrap standardmäßig abschalten. Mit Leader w an-/abschalt
 if has('termguicolors')
     set termguicolors     " Wenn Farben nicht passen, dann die Zeile auskommentieren (z.B. macOS Terminal)	
 endif
-colorscheme catppuccin-latte " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+colorscheme catppuccin-macchiato " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
 
 
 
@@ -90,15 +90,5 @@ set tabstop=2 softtabstop=2	shiftwidth=2    " Nur zwei Tab-Stopp einfügen
 set expandtab           " Tabs in Spaces wandeln
 set formatoptions+=j    " Immer Spaces anstatt Tabs
 "set clipboard=unnamed  " Standard-Register (yy, dd, etc) IMMER in Zwischenablage kopieren 
-
-
-" ### Interner Filemanager (Explore, VExplore, SExplore) optimieren
-let g:netrw_banner = 0        " Banner abschalten
-let g:netrw_browse_split = 4  " im gleichen Fenster öffnen
-let g:netrw_altv = 1          " Split rechts öffnen
-let g:netrw_liststyle = 3     " Tree View
-let g:netrw_winsize = 25      " Fenster schmälter machen
-let g:netrw_list_hide = netrw_gitignore#Hide()    " Gits ausblenden	
-let g:netrw_list_hide.=',\(^\|\s\s)\zs\.\S\+'     " Dotfiles ausblenden
 
 
