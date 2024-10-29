@@ -220,6 +220,7 @@ bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
 # Clipboard
 bindsym $mod+Shift+x cliphist list | rofi -dmenu -font "$gui-font" -p "Select item to copy" -lines 10 -width 35 | cliphist decode | wl-copy && wtype -M ctrl v -m ctrl
 
-
+# Screenshot: grim, slurp, swappy
+bindsym --to-code $mod+Print exec 'grim -g "$(slurp)" - | swappy -f -'
 
 include /etc/sway/config.d/*

@@ -38,6 +38,9 @@ HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=1
 # Store SSH passphrases
 eval $(keychain --eval --quiet --confhost)
 
+# Grim - Screenshot tool
+export GRIM_DEFAULT_DIR="~/screenshots"
+
 # Clipcat clipboard manager
 if type clipcat-menu >/dev/null 2>&1; then
     alias clipedit=' clipcat-menu --finder=builtin edit'
