@@ -118,7 +118,7 @@
       "timezone": "Europe/Berlin",
       "tooltip-format": "{calendar}",
       "format-alt": "  {:%a, %d %b %Y}",
-      "format": "  {:%H:%M}",
+      "format": "   {:%H:%M}",
     },
     //"cpu": {
     //    "format": "{usage}% ",
