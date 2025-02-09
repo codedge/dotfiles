@@ -1,0 +1,19 @@
+rupa/z
+zsh-users/zsh-completions
+
+zsh-users/zsh-syntax-highlighting
+zsh-users/zsh-history-substring-search
+
+# NVM
+lukechilds/zsh-nvm
+
+belak/zsh-utils path:editor
+belak/zsh-utils path:utility
+belak/zsh-utils path:history
+belak/zsh-utils path:completion
+
+# Prompt
+sindresorhus/pure kind:fpath
+
+# Reverse search
+zsh-users/zsh-history-substring-search
