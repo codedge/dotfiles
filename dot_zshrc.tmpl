@@ -7,7 +7,13 @@ export EDITOR="nvim"
 export NVM_LAZY_LOAD=true
 
 # Go
-export PATH="$PATH:$(go env GOBIN):$(go env GOPATH)/bin"
+export GOPATH=/usr/local/go
+export PATH="$PATH:$GOPATH/bin"
+
+# SNAP
+if [ -d /snap/bin ]; then
+    export PATH="$PATH:/snap/bin"
+fi
 
 {{- if eq .chezmoi.os "darwin" }}
 # BREW
