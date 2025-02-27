@@ -6,8 +6,22 @@ A collection of my dotfiles managed through [chezmoi](https://www.chezmoi.io/).
 
 Fonts:
   - Inter
+  - MonoLisa
+  - Hack
+
+Icons:
+  - [papirus-icon-theme](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme) for rofi
+
 
 ## Tools
+
+**Command menu**
+
+[Rofi Wayland](https://github.com/in0ni/rofi-wayland)
+
+Plugins:
+
+  - [rofi-power-menu](https://github.com/jluttine/rofi-power-menu)
 
 **Window Manager**
 
