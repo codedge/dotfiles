@@ -65,7 +65,8 @@ window#waybar.hidden {
 #pulseaudio,
 #network,
 #clock,
-#tray {
+#tray,
+#languag  {
   border-radius: 4px;
   margin: 6px 3px;
   padding: 6px 12px;
@@ -117,6 +118,10 @@ window#waybar.hidden {
 #network {
   background-color: #94e2d5;
   padding-right: 17px;
+}
+
+#language {
+  background-color: #f3e8ff;
 }
 
 #clock {

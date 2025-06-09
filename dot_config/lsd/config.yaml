@@ -1,5 +1,6 @@
 color:
     when: auto
+    theme: custom
 size: short
 total-size: false
 indicators: false
@@ -10,6 +11,8 @@ icons:
 date: '+%Y-%m-%d %H:%M'
 blocks:
     - permission
+    - user
+    - group
     - size
     - date
     - git

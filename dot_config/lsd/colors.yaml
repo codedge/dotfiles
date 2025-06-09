@@ -1,8 +1,8 @@
-user: 0
-group: 0
+user: 230
+group: 187
 permission:
-  read: 0
-  write: 0
+  read: dark_green
+  write: dark_yellow
   exec: 0
   exec-sticky: 0
   no-access: 250
