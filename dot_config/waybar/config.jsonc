@@ -28,7 +28,7 @@
     //"temperature",
     "backlight",
     //"keyboard-state",
-    //"sway/language",
+    "sway/language",
     "battery",
     "clock",
   ],

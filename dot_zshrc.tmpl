@@ -26,7 +26,9 @@ fi
 alias bdu='brew doctor; brew update; brew upgrade'
 {{- end }}
 
-# ANTIDOTE
+###########################################
+### ANTIDOTE
+########################################### 
 {{- if eq .chezmoi.os "linux" }}
 source '/usr/share/zsh-antidote/antidote.zsh'
 {{- else }}
@@ -60,7 +62,10 @@ if type clipcat-menu >/dev/null 2>&1; then
 fi
 {{- end }}
 
-# FZF
+
+###########################################
+### FZF
+###########################################
 source <(fzf --zsh) 
 export FZF_DEFAULT_OPTS='--height 40% --layout reverse --border top'
 export FZF_CATPPUCCIN_MACCHIATO=" \
@@ -96,6 +101,18 @@ alias hx='helix'
 
 # TERRAFORM
 alias tf='terraform'
+
+###########################################
+### YAZI
+###########################################
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}
+
 
 # Git
 alias lg="lazygit"

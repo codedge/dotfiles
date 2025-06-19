@@ -3,12 +3,15 @@ theme = "catppuccin_macchiato"
 [editor]
 cursorline = true
 color-modes = true
-line-number = "relative"
-rulers = [80]
+#line-number = "relative"
+rulers = [120]
 bufferline = "multiple"
+mouse = false
+true-color = true
 
 [editor.lsp]
 display-messages = true
+auto-signature-help = false
 
 [editor.cursor-shape]
 insert = "bar"
@@ -22,4 +25,20 @@ tab = "all"
 
 [editor.indent-guides]
 render = true
+character = "|"
 
+[editor.statusline]
+left = ["mode", "spinner", "version-control", "file-name"]
+
+[keys.normal]
+"A-," = "goto_previous_buffer"
+"A-." = "goto_next_buffer"
+"A-w" = ":buffer-close"
+"A-/" = "repeat_last_motion"
+
+"A-x" = "extend_to_line_bounds"
+"X" = "select_line_above"
+
+[keys.select]
+"A-x" = "extend_to_line_bounds"
+"X" = "select_line_above"
